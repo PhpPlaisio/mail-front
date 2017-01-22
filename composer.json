@@ -17,9 +17,6 @@
   "autoload": {
     "psr-4": {
       "SetBased\\Abc\\Mail\\": "src/"
-    },
-    "classmap": [
-      "src/C.php"
-    ]
+    }
   }
 }
