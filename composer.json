@@ -1,0 +1,22 @@
+{
+  "name": "setbased/abc-mail-front",
+  "description": "ABC-Framework: Mail - Front",
+  "keywords": [
+    "framework",
+    "mail",
+    "message"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "php": ">=5.4.0",
+    "setbased/abc": "dev-master",
+    "setbased/abc-mail-message": "dev-master",
+    "setbased/exception": "1.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "SetBased\\Abc\\Mail\\": "src/"
+    }
+  }
+}
