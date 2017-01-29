@@ -193,7 +193,7 @@ class AbcMailMessage implements MailMessage
                                                 $header['usr_id'],
                                                 $header['emh_address'],
                                                 $header['emh_name'],
-                                                $header['emh_custom_header']);
+                                                $header['emh_value']);
     }
 
     foreach ($this->headers2 as $headers)
@@ -207,7 +207,7 @@ class AbcMailMessage implements MailMessage
                                                   $header['usr_id'],
                                                   $header['emh_address'],
                                                   $header['emh_name'],
-                                                  $header['emh_custom_header']);
+                                                  $header['emh_value']);
       }
     }
 
@@ -279,12 +279,12 @@ class AbcMailMessage implements MailMessage
       $this->headers2[$ehdId] = [];
     }
 
-    $this->headers2[$ehdId][] = ['ehd_id'            => $ehdId,
-                                 'blb_id'            => $blbId,
-                                 'usr_id'            => $usrId,
-                                 'emh_address'       => $address,
-                                 'emh_name'          => mb_substr($name, 0, C::LEN_EMH_NAME),
-                                 'emh_custom_header' => $header];
+    $this->headers2[$ehdId][] = ['ehd_id'      => $ehdId,
+                                 'blb_id'      => $blbId,
+                                 'usr_id'      => $usrId,
+                                 'emh_address' => $address,
+                                 'emh_name'    => mb_substr($name, 0, C::LEN_EMH_NAME),
+                                 'emh_value'   => $header];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -305,12 +305,12 @@ class AbcMailMessage implements MailMessage
   {
     $this->validateHeader($address, $header);
 
-    $this->headers1[$ehdId] = ['ehd_id'            => $ehdId,
-                               'blb_id'            => $blbId,
-                               'usr_id'            => $usrId,
-                               'emh_address'       => $address,
-                               'emh_name'          => mb_substr($name, 0, C::LEN_EMH_NAME),
-                               'emh_custom_header' => $header];
+    $this->headers1[$ehdId] = ['ehd_id'      => $ehdId,
+                               'blb_id'      => $blbId,
+                               'usr_id'      => $usrId,
+                               'emh_address' => $address,
+                               'emh_name'    => mb_substr($name, 0, C::LEN_EMH_NAME),
+                               'emh_value'   => $header];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
