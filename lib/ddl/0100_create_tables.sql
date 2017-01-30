@@ -5,7 +5,7 @@
 /*  FileName : mail.ecm                                                           */
 /*  Platform : MySQL 5.6                                                          */
 /*  Version  : Concept                                                            */
-/*  Date     : zondag 29 januari 2017                                             */
+/*  Date     : maandag 30 januari 2017                                            */
 /*================================================================================*/
 /*================================================================================*/
 /* CREATE TABLES                                                                  */
@@ -36,8 +36,8 @@ CREATE TABLE ELM_MESSAGE (
   elm_number_to INT NOT NULL,
   elm_number_cc INT NOT NULL,
   elm_number_bcc INT NOT NULL,
-  elm_inserted TIMESTAMP DEFAULT current_timestamp NOT NULL,
-  elm_pickuped TIMESTAMP DEFAULT null,
+  elm_inserted TIMESTAMP DEFAULT current_timestamp() NOT NULL,
+  elm_picked_up TIMESTAMP DEFAULT null,
   elm_sent TIMESTAMP DEFAULT null,
   CONSTRAINT PRIMARY_KEY PRIMARY KEY (elm_id)
 )
@@ -94,8 +94,8 @@ The timestamp when this message was inserted.
 */
 
 /*
-COMMENT ON COLUMN ELM_MESSAGE.elm_pickuped
-The timestamp when this message was pickedup by the delivery process
+COMMENT ON COLUMN ELM_MESSAGE.elm_picked_up
+The timestamp when this message was picked up by the delivery process
 */
 
 /*
@@ -118,6 +118,16 @@ CREATE TABLE ELM_MESSAGE_HEADER (
 engine=innodb;
 
 /*
+COMMENT ON COLUMN ELM_MESSAGE_HEADER.blb_id
+The ID of the BLOB (for attachment and embedded content)
+*/
+
+/*
+COMMENT ON COLUMN ELM_MESSAGE_HEADER.usr_id
+The ID of the user associated wth the address.
+*/
+
+/*
 COMMENT ON COLUMN ELM_MESSAGE_HEADER.emh_address
 The address (if the header is an address).
 */
@@ -136,7 +146,7 @@ The value of the header.
 /* CREATE INDEXES                                                                 */
 /*================================================================================*/
 
-CREATE INDEX IX_ELM_MESSAGE1 ON ELM_MESSAGE (elm_pickuped);
+CREATE INDEX IX_ELM_MESSAGE1 ON ELM_MESSAGE (elm_picked_up);
 
 CREATE INDEX IX_FK_ELM_MESSAGE ON ELM_MESSAGE (blb_id_body);
 
