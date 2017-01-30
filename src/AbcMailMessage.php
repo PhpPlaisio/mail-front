@@ -404,9 +404,9 @@ class AbcMailMessage implements MailMessage
       throw new LogicException("Length of address '%s' exceeds %d characters.", $address, C::LEN_EMH_ADDRESS);
     }
 
-    if ($header!==null && mb_strlen($header)>C::LEN_EMH_CUSTOM_HEADER)
+    if ($header!==null && mb_strlen($header)>C::LEN_EMH_VALUE)
     {
-      throw new LogicException("Length of header '%s' exceeds %d characters.", $header, C::LEN_EMH_CUSTOM_HEADER);
+      throw new LogicException("Length of header '%s' exceeds %d characters.", $header, C::LEN_EMH_VALUE);
     }
   }
 
