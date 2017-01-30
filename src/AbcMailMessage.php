@@ -57,8 +57,6 @@ class AbcMailMessage implements MailMessage
   public function __construct($cmpId)
   {
     $this->cmpId = $cmpId;
-
-    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -221,6 +219,8 @@ class AbcMailMessage implements MailMessage
   public function setBody($blbId)
   {
     $this->blbId = $blbId;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
