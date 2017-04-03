@@ -10,9 +10,9 @@
   "license": "MIT",
   "require": {
     "php": ">=5.4.0",
-    "setbased/abc": "dev-master",
-    "setbased/abc-mail-message": "dev-master",
-    "setbased/exception": "1.*"
+    "setbased/abc": "^0.9.1",
+    "setbased/abc-mail-message": "0.9.0",
+    "setbased/exception": "^1.0.0"
   },
   "autoload": {
     "psr-4": {
