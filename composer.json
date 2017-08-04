@@ -2,16 +2,16 @@
   "name": "setbased/abc-mail-front",
   "description": "ABC-Framework: Mail - Front",
   "keywords": [
-    "framework",
+    "ABC-Framework",
     "mail",
     "message"
   ],
   "type": "library",
   "license": "MIT",
   "require": {
-    "php": ">=5.4.0",
-    "setbased/abc": "^0.9.1",
-    "setbased/abc-mail-message": "0.9.0",
+    "php": ">=7.0.0",
+    "setbased/abc": "^0.10.0",
+    "setbased/abc-mail-message": "^0.9.0",
     "setbased/exception": "^1.0.0"
   },
   "autoload": {
