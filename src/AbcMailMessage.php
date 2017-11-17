@@ -6,7 +6,6 @@ use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Exception\LogicException;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * ABC's default implementation of MailMessage.
  */
@@ -19,13 +18,6 @@ class AbcMailMessage implements MailMessage
    * @var int|null
    */
   protected $blbId;
-
-  /**
-   * The ID of the company for which this mail will be send.
-   *
-   * @var int
-   */
-  protected $cmpId;
 
   /**
    * The single valued headers of this message.
@@ -47,17 +39,6 @@ class AbcMailMessage implements MailMessage
    * @var string|null
    */
   protected $subject;
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Object constructor.
-   *
-   * @param int $cmpId The ID of the company.
-   */
-  public function __construct($cmpId)
-  {
-    $this->cmpId = $cmpId;
-  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -165,27 +146,27 @@ class AbcMailMessage implements MailMessage
    */
   public function send()
   {
+    $cmpId = Abc::$companyResolver->getCmpId();
+
     $count = $this->countAddressees();
-
     $this->validate($count);
-
     $transmitter = $this->getTransmitter($count);
 
-    $elm_id = Abc::$DL->abcMailFrontInsertMessage($this->cmpId,
-                                                  $this->blbId,
-                                                  $transmitter['usr_id'],
-                                                  $transmitter['emh_address'],
-                                                  $transmitter['emh_name'],
-                                                  $this->subject,
-                                                  $count['from'],
-                                                  $count['to'],
-                                                  $count['cc'],
-                                                  $count['bcc']);
+    $elmId = Abc::$DL->abcMailFrontInsertMessage($cmpId,
+                                                 $this->blbId,
+                                                 $transmitter['usr_id'],
+                                                 $transmitter['emh_address'],
+                                                 $transmitter['emh_name'],
+                                                 $this->subject,
+                                                 $count['from'],
+                                                 $count['to'],
+                                                 $count['cc'],
+                                                 $count['bcc']);
 
     foreach ($this->headers1 as $header)
     {
-      Abc::$DL->abcMailFrontInsertMessageHeader($this->cmpId,
-                                                $elm_id,
+      Abc::$DL->abcMailFrontInsertMessageHeader($cmpId,
+                                                $elmId,
                                                 $header['ehd_id'],
                                                 $header['blb_id'],
                                                 $header['usr_id'],
@@ -198,8 +179,8 @@ class AbcMailMessage implements MailMessage
     {
       foreach ($headers as $header)
       {
-        Abc::$DL->abcMailFrontInsertMessageHeader($this->cmpId,
-                                                  $elm_id,
+        Abc::$DL->abcMailFrontInsertMessageHeader($cmpId,
+                                                  $elmId,
                                                   $header['ehd_id'],
                                                   $header['blb_id'],
                                                   $header['usr_id'],
@@ -209,7 +190,7 @@ class AbcMailMessage implements MailMessage
       }
     }
 
-    return $elm_id;
+    return $elmId;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
