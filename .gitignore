@@ -1,4 +1,5 @@
 /.idea/
+/bin/phing
 /composer.lock
 /src/C.php
 /vendor/
