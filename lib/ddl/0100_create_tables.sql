@@ -1,11 +1,11 @@
 /*================================================================================*/
 /* DDL SCRIPT                                                                     */
 /*================================================================================*/
-/*  Title    :                                                                    */
-/*  FileName : mail.ecm                                                           */
+/*  Title    : ABC-Framework: Mail Front                                          */
+/*  FileName : abc-mail-front.ecm                                                 */
 /*  Platform : MySQL 5.6                                                          */
-/*  Version  : Concept                                                            */
-/*  Date     : maandag 30 januari 2017                                            */
+/*  Version  :                                                                    */
+/*  Date     : zaterdag 25 november 2017                                          */
 /*================================================================================*/
 /*================================================================================*/
 /* CREATE TABLES                                                                  */
@@ -168,11 +168,11 @@ ALTER TABLE ELM_MESSAGE
 
 ALTER TABLE ELM_MESSAGE
   ADD CONSTRAINT FK_ELM_MESSAGE_ABC_COMPANY
-  FOREIGN KEY (cmp_id) REFERENCES AUT_COMPANY (cmp_id);
+  FOREIGN KEY (cmp_id) REFERENCES ABC_AUTH_COMPANY (cmp_id);
 
 ALTER TABLE ELM_MESSAGE
   ADD CONSTRAINT FK_ELM_MESSAGE_AUT_USER
-  FOREIGN KEY (usr_id) REFERENCES AUT_USER (usr_id);
+  FOREIGN KEY (usr_id) REFERENCES ABC_AUTH_USER (usr_id);
 
 ALTER TABLE ELM_MESSAGE_HEADER
   ADD CONSTRAINT FK_ELM_ATTRIBUTE_VALUES_ABC_BLOB
@@ -180,11 +180,11 @@ ALTER TABLE ELM_MESSAGE_HEADER
 
 ALTER TABLE ELM_MESSAGE_HEADER
   ADD CONSTRAINT FK_ELM_ATTRIBUTE_VALUES_ABC_COMPANY
-  FOREIGN KEY (cmp_id) REFERENCES AUT_COMPANY (cmp_id);
+  FOREIGN KEY (cmp_id) REFERENCES ABC_AUTH_COMPANY (cmp_id);
 
 ALTER TABLE ELM_MESSAGE_HEADER
   ADD CONSTRAINT FK_ELM_ATTRIBUTE_VALUES_ABC_USER
-  FOREIGN KEY (usr_id) REFERENCES AUT_USER (usr_id);
+  FOREIGN KEY (usr_id) REFERENCES ABC_AUTH_USER (usr_id);
 
 ALTER TABLE ELM_MESSAGE_HEADER
   ADD CONSTRAINT ELM_ATTRIBUTE_VALUES_ibfk_11
