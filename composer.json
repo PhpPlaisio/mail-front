@@ -9,9 +9,9 @@
   "type": "library",
   "license": "MIT",
   "require": {
-    "php": ">=7.0.0",
+    "php": ">=7.1.0",
     "setbased/abc": "^0.10.23",
-    "setbased/abc-mail-message": "^0.9.0",
+    "setbased/abc-mail-message": "^0.9.1",
     "setbased/exception": "^1.0.0"
   },
   "require-dev": {
