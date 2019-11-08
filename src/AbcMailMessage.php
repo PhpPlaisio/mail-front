@@ -270,7 +270,7 @@ class AbcMailMessage implements MailMessage
                                  'blb_id'      => $blbId,
                                  'usr_id'      => $usrId,
                                  'emh_address' => $address,
-                                 'emh_name'    => mb_substr($name, 0, C::LEN_EMH_NAME),
+                                 'emh_name'    => mb_substr($name ?? '', 0, C::LEN_EMH_NAME),
                                  'emh_value'   => $header];
   }
 
@@ -301,7 +301,7 @@ class AbcMailMessage implements MailMessage
                                'blb_id'      => $blbId,
                                'usr_id'      => $usrId,
                                'emh_address' => $address,
-                               'emh_name'    => mb_substr($name, 0, C::LEN_EMH_NAME),
+                               'emh_name'    => mb_substr($name ?? '', 0, C::LEN_EMH_NAME),
                                'emh_value'   => $header];
   }
 
