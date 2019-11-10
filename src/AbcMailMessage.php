@@ -138,7 +138,7 @@ class AbcMailMessage implements MailMessage
    */
   public function embed(int $blbId): string
   {
-    // TODO: Implement embed() method.
+    throw new LogicException('Not implemented');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
