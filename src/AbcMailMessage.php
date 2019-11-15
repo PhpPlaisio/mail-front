@@ -1,9 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
-namespace SetBased\Abc\Mail;
+declare(strict_types=1);
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
+namespace Plaisio\Mail;
+
+use Plaisio\C;
+use Plaisio\Kernel\Nub;
 use SetBased\Exception\LogicException;
 
 /**
@@ -44,7 +45,7 @@ class AbcMailMessage implements MailMessage
   /**
    * {@inheritdoc}
    */
-  public function addBcc($usrId, $address, $name = null)
+  public function addBcc(?int $usrId, string $address, string $name = null): MailMessage
   {
     $this->addHeader(C::EHD_ID_BCC, null, $usrId, $address, $name, null);
 
@@ -55,7 +56,7 @@ class AbcMailMessage implements MailMessage
   /**
    * {@inheritdoc}
    */
-  public function addCc($usrId, $address, $name = null)
+  public function addCc(?int $usrId, string $address, ?string $name = null): MailMessage
   {
     $this->addHeader(C::EHD_ID_CC, null, $usrId, $address, $name, null);
 
@@ -66,7 +67,7 @@ class AbcMailMessage implements MailMessage
   /**
    * {@inheritdoc}
    */
-  public function addCustomHeader($name, $value)
+  public function addCustomHeader(?string $name, ?string $value): MailMessage
   {
     if ($name!==null && $value!==null)
     {
@@ -80,7 +81,7 @@ class AbcMailMessage implements MailMessage
   /**
    * {@inheritdoc}
    */
-  public function addFrom($usrId, $address, $name = null)
+  public function addFrom(?int $usrId, string $address, ?string $name = null): MailMessage
   {
     $this->addHeader(C::EHD_ID_FROM, null, $usrId, $address, $name, null);
 
@@ -91,7 +92,7 @@ class AbcMailMessage implements MailMessage
   /**
    * {@inheritdoc}
    */
-  public function addReadReceiptTo($usrId, $address, $name = null)
+  public function addReadReceiptTo(?int $usrId, string $address, ?string $name = null): MailMessage
   {
     $this->addHeader(C::EHD_ID_CONFIRM_READING_TO, null, $usrId, $address, $name, null);
 
@@ -102,7 +103,7 @@ class AbcMailMessage implements MailMessage
   /**
    * {@inheritdoc}
    */
-  public function addReplyTo($usrId, $address, $name = null)
+  public function addReplyTo(?int $usrId, string $address, ?string $name = null): MailMessage
   {
     $this->addHeader(C::EHD_ID_REPLY_TO, null, $usrId, $address, $name, null);
 
@@ -113,7 +114,7 @@ class AbcMailMessage implements MailMessage
   /**
    * {@inheritdoc}
    */
-  public function addTo($usrId, $address, $name = null)
+  public function addTo(?int $usrId, string $address, ?string $name = null): MailMessage
   {
     $this->addHeader(C::EHD_ID_TO, null, $usrId, $address, $name, null);
 
@@ -124,7 +125,7 @@ class AbcMailMessage implements MailMessage
   /**
    * {@inheritdoc}
    */
-  public function attach($blbId)
+  public function attach(int $blbId): MailMessage
   {
     $this->addHeader(C::EHD_ID_ATTACHMENT, $blbId, null, null, null, null);
 
@@ -135,24 +136,24 @@ class AbcMailMessage implements MailMessage
   /**
    * {@inheritdoc}
    */
-  public function embed($blbId)
+  public function embed(int $blbId): string
   {
-    // TODO: Implement embed() method.
+    throw new LogicException('Not implemented');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  public function send()
+  public function send(): int
   {
-    $cmpId = Abc::$companyResolver->getCmpId();
+    $cmpId = Nub::$companyResolver->getCmpId();
 
     $count = $this->countAddressees();
     $this->validate($count);
     $transmitter = $this->getTransmitter($count);
 
-    $elmId = Abc::$DL->abcMailFrontInsertMessage($cmpId,
+    $elmId = Nub::$DL->abcMailFrontInsertMessage($cmpId,
                                                  $this->blbId,
                                                  $transmitter['usr_id'],
                                                  $transmitter['emh_address'],
@@ -165,10 +166,10 @@ class AbcMailMessage implements MailMessage
 
     foreach ($this->headers1 as $header)
     {
-      Abc::$DL->abcMailFrontInsertMessageHeader($cmpId,
-                                                $elmId,
-                                                $header['ehd_id'],
+      Nub::$DL->abcMailFrontInsertMessageHeader($cmpId,
                                                 $header['blb_id'],
+                                                $header['ehd_id'],
+                                                $elmId,
                                                 $header['usr_id'],
                                                 $header['emh_address'],
                                                 $header['emh_name'],
@@ -179,7 +180,7 @@ class AbcMailMessage implements MailMessage
     {
       foreach ($headers as $header)
       {
-        Abc::$DL->abcMailFrontInsertMessageHeader($cmpId,
+        Nub::$DL->abcMailFrontInsertMessageHeader($cmpId,
                                                   $elmId,
                                                   $header['ehd_id'],
                                                   $header['blb_id'],
@@ -197,7 +198,7 @@ class AbcMailMessage implements MailMessage
   /**
    * {@inheritdoc}
    */
-  public function setBody($blbId)
+  public function setBody(int $blbId): MailMessage
   {
     $this->blbId = $blbId;
 
@@ -208,7 +209,7 @@ class AbcMailMessage implements MailMessage
   /**
    * {@inheritdoc}
    */
-  public function setMessageId($id)
+  public function setMessageId(string $id): MailMessage
   {
     $this->setHeader(C::EHD_ID_MESSAGE_ID, null, null, null, null, $id);
 
@@ -219,7 +220,7 @@ class AbcMailMessage implements MailMessage
   /**
    * {@inheritdoc}
    */
-  public function setSender($usrId, $address, $name = null)
+  public function setSender(?int $usrId, string $address, ?string $name = null): MailMessage
   {
     $this->setHeader(C::EHD_ID_SENDER, null, $usrId, $address, $name, null);
 
@@ -230,7 +231,7 @@ class AbcMailMessage implements MailMessage
   /**
    * {@inheritdoc}
    */
-  public function setSubject($subject)
+  public function setSubject(string $subject): MailMessage
   {
     $this->subject = mb_substr($subject, 0, C::LEN_ELM_SUBJECT);
 
@@ -251,7 +252,12 @@ class AbcMailMessage implements MailMessage
    * @api
    * @since 1.0.0
    */
-  protected function addHeader($ehdId, $blbId, $usrId, $address, $name, $header)
+  protected function addHeader(?int $ehdId,
+                               ?int $blbId,
+                               ?int $usrId,
+                               ?string $address,
+                               ?string $name,
+                               ?string $header): void
   {
     $this->validateHeader($address, $header);
 
@@ -264,7 +270,7 @@ class AbcMailMessage implements MailMessage
                                  'blb_id'      => $blbId,
                                  'usr_id'      => $usrId,
                                  'emh_address' => $address,
-                                 'emh_name'    => mb_substr($name, 0, C::LEN_EMH_NAME),
+                                 'emh_name'    => mb_substr($name ?? '', 0, C::LEN_EMH_NAME),
                                  'emh_value'   => $header];
   }
 
@@ -282,7 +288,12 @@ class AbcMailMessage implements MailMessage
    * @api
    * @since 1.0.0
    */
-  protected function setHeader($ehdId, $blbId, $usrId, $address, $name, $header)
+  protected function setHeader(?int $ehdId,
+                               ?int $blbId,
+                               ?int $usrId,
+                               ?string $address,
+                               ?string $name,
+                               ?string $header): void
   {
     $this->validateHeader($address, $header);
 
@@ -290,7 +301,7 @@ class AbcMailMessage implements MailMessage
                                'blb_id'      => $blbId,
                                'usr_id'      => $usrId,
                                'emh_address' => $address,
-                               'emh_name'    => mb_substr($name, 0, C::LEN_EMH_NAME),
+                               'emh_name'    => mb_substr($name ?? '', 0, C::LEN_EMH_NAME),
                                'emh_value'   => $header];
   }
 
@@ -300,7 +311,7 @@ class AbcMailMessage implements MailMessage
    *
    * @return array
    */
-  private function countAddressees()
+  private function countAddressees(): array
   {
     return ['from'   => (isset($this->headers2[C::EHD_ID_FROM])) ? count($this->headers2[C::EHD_ID_FROM]) : 0,
             'to'     => (isset($this->headers2[C::EHD_ID_TO])) ? count($this->headers2[C::EHD_ID_TO]) : 0,
@@ -317,7 +328,7 @@ class AbcMailMessage implements MailMessage
    *
    * @return array
    */
-  private function getTransmitter($count)
+  private function getTransmitter(array $count): array
   {
     if ($count['from']==1)
     {
@@ -343,7 +354,7 @@ class AbcMailMessage implements MailMessage
    *
    * @param array $count The number of From, To, Cc, and Bcc addresses of this message.
    */
-  private function validate($count)
+  private function validate(array $count): void
   {
     if ($count['from']>=2 && $count['sender']==0)
     {
@@ -378,7 +389,7 @@ class AbcMailMessage implements MailMessage
    * @param string|null $address The address.
    * @param string|null $header  The custom header.
    */
-  private function validateHeader($address, $header)
+  private function validateHeader(?string $address, ?string $header): void
   {
     if ($address!==null && mb_strlen($address)>C::LEN_EMH_ADDRESS)
     {

@@ -2,33 +2,33 @@
  * Inserts a mail message header for a mail message.
  *
  * @param p_cmp_id      The ID of the company.
- * @param p_elm_id      The ID of the mail message.
- * @param p_ehd_id      The ID of header (type).
  * @param p_blb_id      The ID of the BLOB (for attachment and embedded content).
+ * @param p_ehd_id      The ID of header (type).
+ * @param p_elm_id      The ID of the mail message.
  * @param p_usr_id      The ID of the user associated wth the address.
  * @param p_emh_address The address.
  * @param p_emh_name    The name associated wth the address.
  * @param p_emh_value   The value of the (custom) header.
  */
-create procedure abc_mail_front_insert_message_header( in p_cmp_id      @elm_message_header.cmp_id%type@,
-                                                       in p_elm_id      @elm_message_header.elm_id%type@,
-                                                       in p_ehd_id      @elm_message_header.ehd_id%type@,
-                                                       in p_blb_id      @elm_message_header.blb_id%type@,
-                                                       in p_usr_id      @elm_message_header.usr_id%type@,
-                                                       in p_emh_address @elm_message_header.emh_address%type@,
-                                                       in p_emh_name    @elm_message_header.emh_name%type@,
-                                                       in p_emh_value   @elm_message_header.emh_value%type@ )
+create procedure abc_mail_front_insert_message_header(in p_cmp_id      @abc_mail_message_header.cmp_id%type@,
+                                                      in p_blb_id      @abc_mail_message_header.blb_id%type@,
+                                                      in p_ehd_id      @abc_mail_message_header.ehd_id%type@,
+                                                      in p_elm_id      @abc_mail_message_header.elm_id%type@,
+                                                      in p_usr_id      @abc_mail_message_header.usr_id%type@,
+                                                      in p_emh_address @abc_mail_message_header.emh_address%type@,
+                                                      in p_emh_name    @abc_mail_message_header.emh_name%type@,
+                                                      in p_emh_value   @abc_mail_message_header.emh_value%type@)
 modifies sql data
 -- type: none
 begin
-  insert into ELM_MESSAGE_HEADER( cmp_id
-  ,                               elm_id
-  ,                               ehd_id
-  ,                               blb_id
-  ,                               usr_id
-  ,                               emh_address
-  ,                               emh_name
-  ,                               emh_value )
+  insert into ABC_MAIL_MESSAGE_HEADER( cmp_id
+  ,                                    elm_id
+  ,                                    ehd_id
+  ,                                    blb_id
+  ,                                    usr_id
+  ,                                    emh_address
+  ,                                    emh_name
+  ,                                    emh_value )
   values( p_cmp_id
   ,       p_elm_id
   ,       p_ehd_id
