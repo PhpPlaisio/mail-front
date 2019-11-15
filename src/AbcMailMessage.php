@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Mail;
+namespace Plaisio\Mail;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
+use Plaisio\C;
+use Plaisio\Kernel\Nub;
 use SetBased\Exception\LogicException;
 
 /**
@@ -147,13 +147,13 @@ class AbcMailMessage implements MailMessage
    */
   public function send(): int
   {
-    $cmpId = Abc::$companyResolver->getCmpId();
+    $cmpId = Nub::$companyResolver->getCmpId();
 
     $count = $this->countAddressees();
     $this->validate($count);
     $transmitter = $this->getTransmitter($count);
 
-    $elmId = Abc::$DL->abcMailFrontInsertMessage($cmpId,
+    $elmId = Nub::$DL->abcMailFrontInsertMessage($cmpId,
                                                  $this->blbId,
                                                  $transmitter['usr_id'],
                                                  $transmitter['emh_address'],
@@ -166,10 +166,10 @@ class AbcMailMessage implements MailMessage
 
     foreach ($this->headers1 as $header)
     {
-      Abc::$DL->abcMailFrontInsertMessageHeader($cmpId,
-                                                $elmId,
-                                                $header['ehd_id'],
+      Nub::$DL->abcMailFrontInsertMessageHeader($cmpId,
                                                 $header['blb_id'],
+                                                $header['ehd_id'],
+                                                $elmId,
                                                 $header['usr_id'],
                                                 $header['emh_address'],
                                                 $header['emh_name'],
@@ -180,7 +180,7 @@ class AbcMailMessage implements MailMessage
     {
       foreach ($headers as $header)
       {
-        Abc::$DL->abcMailFrontInsertMessageHeader($cmpId,
+        Nub::$DL->abcMailFrontInsertMessageHeader($cmpId,
                                                   $elmId,
                                                   $header['ehd_id'],
                                                   $header['blb_id'],

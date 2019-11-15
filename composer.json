@@ -1,17 +1,16 @@
 {
-  "name": "setbased/abc-mail-front",
-  "description": "SetBased ABC-Framework: Mail - Front",
+  "name": "plaisio/mail-front",
+  "description": "Plaisio: Mail - Front",
   "keywords": [
-    "SetBased ABC-Framework",
-    "Mail",
-    "Message"
+    "Plaisio",
+    "Mail Message"
   ],
   "license": "MIT",
   "require": {
     "php": ">=7.1.0",
     "ext-mbstring": "*",
-    "setbased/abc": "^0.10.23",
-    "setbased/abc-mail-message": "^1.0.0",
+    "plaisio/kernel": "^1.0.0",
+    "plaisio/mail-message": "^2.0.0",
     "setbased/exception": "^2.0.0"
   },
   "require-dev": {
@@ -19,7 +18,7 @@
   },
   "autoload": {
     "psr-4": {
-      "SetBased\\Abc\\Mail\\": "src/"
+      "Plaisio\\Mail\\": "src/"
     }
   },
   "config": {
