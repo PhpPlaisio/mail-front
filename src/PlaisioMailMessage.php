@@ -8,9 +8,9 @@ use Plaisio\Kernel\Nub;
 use SetBased\Exception\LogicException;
 
 /**
- * ABC's default implementation of MailMessage.
+ * Plaisio's default implementation of MailMessage.
  */
-class AbcMailMessage implements MailMessage
+class PlaisioMailMessage implements MailMessage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
