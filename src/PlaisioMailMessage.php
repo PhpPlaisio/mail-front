@@ -181,9 +181,9 @@ class PlaisioMailMessage implements MailMessage
       foreach ($headers as $header)
       {
         Nub::$DL->abcMailFrontInsertMessageHeader($cmpId,
-                                                  $elmId,
-                                                  $header['ehd_id'],
                                                   $header['blb_id'],
+                                                  $header['ehd_id'],
+                                                  $elmId,
                                                   $header['usr_id'],
                                                   $header['emh_address'],
                                                   $header['emh_name'],
