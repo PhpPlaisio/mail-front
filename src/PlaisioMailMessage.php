@@ -4,13 +4,13 @@ declare(strict_types=1);
 namespace Plaisio\Mail;
 
 use Plaisio\C;
-use Plaisio\Kernel\Nub;
+use Plaisio\PlaisioObject;
 use SetBased\Exception\LogicException;
 
 /**
  * Plaisio's default implementation of MailMessage.
  */
-class PlaisioMailMessage implements MailMessage
+class PlaisioMailMessage extends PlaisioObject implements MailMessage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -147,47 +147,47 @@ class PlaisioMailMessage implements MailMessage
    */
   public function send(): int
   {
-    $cmpId = Nub::$nub->companyResolver->getCmpId();
+    $cmpId = $this->nub->company->cmpId;
 
     $count = $this->countAddressees();
     $this->validate($count);
     $transmitter = $this->getTransmitter($count);
 
-    $elmId = Nub::$nub->DL->abcMailFrontInsertMessage($cmpId,
-                                                      $this->blbId,
-                                                      $transmitter['usr_id'],
-                                                      $transmitter['emh_address'],
-                                                      $transmitter['emh_name'],
-                                                      $this->subject,
-                                                      $count['from'],
-                                                      $count['to'],
-                                                      $count['cc'],
-                                                      $count['bcc']);
+    $elmId = $this->nub->DL->abcMailFrontInsertMessage($cmpId,
+                                                       $this->blbId,
+                                                       $transmitter['usr_id'],
+                                                       $transmitter['emh_address'],
+                                                       $transmitter['emh_name'],
+                                                       $this->subject,
+                                                       $count['from'],
+                                                       $count['to'],
+                                                       $count['cc'],
+                                                       $count['bcc']);
 
     foreach ($this->headers1 as $header)
     {
-      Nub::$nub->DL->abcMailFrontInsertMessageHeader($cmpId,
-                                                     $header['blb_id'],
-                                                     $header['ehd_id'],
-                                                     $elmId,
-                                                     $header['usr_id'],
-                                                     $header['emh_address'],
-                                                     $header['emh_name'],
-                                                     $header['emh_value']);
+      $this->nub->DL->abcMailFrontInsertMessageHeader($cmpId,
+                                                      $header['blb_id'],
+                                                      $header['ehd_id'],
+                                                      $elmId,
+                                                      $header['usr_id'],
+                                                      $header['emh_address'],
+                                                      $header['emh_name'],
+                                                      $header['emh_value']);
     }
 
     foreach ($this->headers2 as $headers)
     {
       foreach ($headers as $header)
       {
-        Nub::$nub->DL->abcMailFrontInsertMessageHeader($cmpId,
-                                                       $header['blb_id'],
-                                                       $header['ehd_id'],
-                                                       $elmId,
-                                                       $header['usr_id'],
-                                                       $header['emh_address'],
-                                                       $header['emh_name'],
-                                                       $header['emh_value']);
+        $this->nub->DL->abcMailFrontInsertMessageHeader($cmpId,
+                                                        $header['blb_id'],
+                                                        $header['ehd_id'],
+                                                        $elmId,
+                                                        $header['usr_id'],
+                                                        $header['emh_address'],
+                                                        $header['emh_name'],
+                                                        $header['emh_value']);
       }
     }
 
