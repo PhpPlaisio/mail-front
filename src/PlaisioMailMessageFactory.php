@@ -16,7 +16,7 @@ class PlaisioMailMessageFactory extends PlaisioObject implements MailMessageFact
    */
   public function createMailMessage(): MailMessage
   {
-    return new PlaisioMailMessage($this->nub);
+    return new PlaisioMailMessage($this);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
