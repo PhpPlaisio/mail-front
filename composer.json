@@ -11,7 +11,7 @@
     "ext-mbstring": "*",
     "plaisio/company-resolver": "^2.0",
     "plaisio/kernel": "^3.0",
-    "plaisio/mail-message": "^1.2",
+    "plaisio/mail-message": "^2.0",
     "setbased/exception": "^2.1"
   },
   "require-dev": {

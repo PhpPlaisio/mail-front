@@ -14,7 +14,7 @@ class PlaisioMailMessageFactory extends PlaisioObject implements MailMessageFact
   /**
    * @inheritdoc
    */
-  public function createMailMessage(): MailMessage
+  public function create(): MailMessage
   {
     return new PlaisioMailMessage($this);
   }
