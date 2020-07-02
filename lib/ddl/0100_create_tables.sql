@@ -1,17 +1,18 @@
 /*================================================================================*/
 /* DDL SCRIPT                                                                     */
 /*================================================================================*/
-/*  Title    : ABC-Framework: Mail Front                                          */
-/*  FileName : abc-mail-front.ecm                                                 */
+/*  Title    : Plaisio: Mail Front                                                */
+/*  FileName : mail-front.ecm                                                     */
 /*  Platform : MySQL 5.6                                                          */
 /*  Version  :                                                                    */
-/*  Date     : zondag 10 november 2019                                            */
+/*  Date     : donderdag 2 juli 2020                                              */
 /*================================================================================*/
 /*================================================================================*/
 /* CREATE TABLES                                                                  */
 /*================================================================================*/
 
 CREATE TABLE ABC_MAIL_AUTHORIZED_DOMAIN (
+  cmp_id SMALLINT UNSIGNED NOT NULL,
   atd_domain_name VARCHAR(32) NOT NULL,
   CONSTRAINT PRIMARY_KEY PRIMARY KEY (atd_domain_name)
 )
@@ -146,6 +147,8 @@ The value of the header.
 /* CREATE INDEXES                                                                 */
 /*================================================================================*/
 
+CREATE UNIQUE INDEX IX_ABC_MAIL_AUTHORIZED_DOMAIN1 ON ABC_MAIL_AUTHORIZED_DOMAIN (cmp_id, atd_domain_name);
+
 CREATE INDEX IX_ABC_MAIL_MESSAGE1 ON ABC_MAIL_MESSAGE (elm_picked_up);
 
 CREATE INDEX IX_FK_ABC_MAIL_MESSAGE ON ABC_MAIL_MESSAGE (blb_id_body);
@@ -161,6 +164,10 @@ CREATE INDEX IX_FK_ABC_MAIL_MESSAGE_HEADER2 ON ABC_MAIL_MESSAGE_HEADER (cmp_id);
 /*================================================================================*/
 /* CREATE FOREIGN KEYS                                                            */
 /*================================================================================*/
+
+ALTER TABLE ABC_MAIL_AUTHORIZED_DOMAIN
+  ADD CONSTRAINT FK_ABC_MAIL_AUTHORIZED_DOMAIN_ABC_AUTH_COMPANY
+  FOREIGN KEY (cmp_id) REFERENCES ABC_AUTH_COMPANY (cmp_id);
 
 ALTER TABLE ABC_MAIL_MESSAGE
   ADD CONSTRAINT FK_ABC_MAIL_MESSAGE_ABC_BLOB
