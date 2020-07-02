@@ -12,9 +12,10 @@
 /*================================================================================*/
 
 CREATE TABLE ABC_MAIL_AUTHORIZED_DOMAIN (
+  mad_id SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
   cmp_id SMALLINT UNSIGNED NOT NULL,
   atd_domain_name VARCHAR(32) NOT NULL,
-  CONSTRAINT PRIMARY_KEY PRIMARY KEY (atd_domain_name)
+  CONSTRAINT PRIMARY_KEY PRIMARY KEY (mad_id)
 )
 engine=innodb;
 
@@ -148,6 +149,8 @@ The value of the header.
 /*================================================================================*/
 
 CREATE UNIQUE INDEX IX_ABC_MAIL_AUTHORIZED_DOMAIN1 ON ABC_MAIL_AUTHORIZED_DOMAIN (cmp_id, atd_domain_name);
+
+CREATE INDEX IX_ABC_MAIL_AUTHORIZED_DOMAIN2 ON ABC_MAIL_AUTHORIZED_DOMAIN (atd_domain_name);
 
 CREATE INDEX IX_ABC_MAIL_MESSAGE1 ON ABC_MAIL_MESSAGE (elm_picked_up);
 
