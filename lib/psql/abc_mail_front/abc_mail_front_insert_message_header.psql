@@ -9,6 +9,8 @@
  * @param p_emh_address The address.
  * @param p_emh_name    The name associated wth the address.
  * @param p_emh_value   The value of the (custom) header.
+ *
+ * @type none
  */
 create procedure abc_mail_front_insert_message_header(in p_cmp_id      @abc_mail_message_header.cmp_id%type@,
                                                       in p_blb_id      @abc_mail_message_header.blb_id%type@,
@@ -19,7 +21,6 @@ create procedure abc_mail_front_insert_message_header(in p_cmp_id      @abc_mail
                                                       in p_emh_name    @abc_mail_message_header.emh_name%type@,
                                                       in p_emh_value   @abc_mail_message_header.emh_value%type@)
 modifies sql data
--- type: none
 begin
   insert into ABC_MAIL_MESSAGE_HEADER( cmp_id
   ,                                    elm_id

@@ -11,6 +11,10 @@
  * @param p_elm_number_to   The number of To addressees.
  * @param p_elm_number_cc   The number of Cc addressees.
  * @param p_elm_number_bcc  The number of Bcc addressees.
+ *
+ * @type singleton1
+ *
+ * @return int
  */
 create procedure abc_mail_front_insert_message(in p_cmp_id          @abc_mail_message.cmp_id%type@,
                                                in p_blb_id_body     @abc_mail_message.blb_id_body%type@,
@@ -23,8 +27,6 @@ create procedure abc_mail_front_insert_message(in p_cmp_id          @abc_mail_me
                                                in p_elm_number_cc   @abc_mail_message.elm_number_cc%type@,
                                                in p_elm_number_bcc  @abc_mail_message.elm_number_bcc%type@)
 modifies sql data
--- type:   singleton1
--- return: int
 begin
   insert into ABC_MAIL_MESSAGE( cmp_id
   ,                             blb_id_body
