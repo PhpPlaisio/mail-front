@@ -18,28 +18,28 @@ class PlaisioMailMessage extends PlaisioObject implements MailMessage
    *
    * @var int|null
    */
-  protected $blbId;
+  protected ?int $blbId = null;
 
   /**
    * The single valued headers of this message.
    *
    * @var array[]
    */
-  protected $headers1 = [];
+  protected array $headers1 = [];
 
   /**
    * The list valued headers of this message.
    *
    * @var array[]
    */
-  protected $headers2 = [];
+  protected array $headers2 = [];
 
   /**
    * The subject of this message.
    *
    * @var string|null
    */
-  protected $subject;
+  protected ?string $subject = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -246,7 +246,7 @@ class PlaisioMailMessage extends PlaisioObject implements MailMessage
    * @param int|null    $blbId   the ID of the BLOB.
    * @param int|null    $usrId   The ID of the user.
    * @param string|null $address The address.
-   * @param string|null $name    The name name associated with the address.
+   * @param string|null $name    The name associated with the address.
    * @param string|null $header  The custom header.
    *
    * @api
@@ -282,7 +282,7 @@ class PlaisioMailMessage extends PlaisioObject implements MailMessage
    * @param int|null    $blbId   The ID of the BLOB.
    * @param int|null    $usrId   The ID of the user.
    * @param string|null $address The address.
-   * @param string|null $name    The name name associated with the address.
+   * @param string|null $name    The name associated with the address.
    * @param string|null $header  The custom header.
    *
    * @api
