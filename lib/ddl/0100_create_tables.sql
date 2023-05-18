@@ -5,7 +5,7 @@
 /*  FileName : mail-front.ecm                                                     */
 /*  Platform : MySQL 5.6                                                          */
 /*  Version  :                                                                    */
-/*  Date     : donderdag 2 juli 2020                                              */
+/*  Date     : Thursday, May 18, 2023                                             */
 /*================================================================================*/
 /*================================================================================*/
 /* CREATE TABLES                                                                  */
@@ -19,12 +19,47 @@ CREATE TABLE ABC_MAIL_AUTHORIZED_DOMAIN (
 )
 engine=innodb;
 
+/*
+COMMENT ON TABLE ABC_MAIL_AUTHORIZED_DOMAIN
+The domains for which the MTA is authorized to send emails.
+*/
+
+/*
+COMMENT ON COLUMN ABC_MAIL_AUTHORIZED_DOMAIN.mad_id
+The PK of the authorized domain.
+*/
+
+/*
+COMMENT ON COLUMN ABC_MAIL_AUTHORIZED_DOMAIN.cmp_id
+The ID of the company.
+*/
+
+/*
+COMMENT ON COLUMN ABC_MAIL_AUTHORIZED_DOMAIN.atd_domain_name
+The name of the domain.
+*/
+
 CREATE TABLE ABC_MAIL_HEADER (
   ehd_id TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
   ehd_label VARCHAR(32) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
   CONSTRAINT PRIMARY_KEY PRIMARY KEY (ehd_id)
 )
 engine=innodb;
+
+/*
+COMMENT ON TABLE ABC_MAIL_HEADER
+A reference table with all possible mail headers.
+*/
+
+/*
+COMMENT ON COLUMN ABC_MAIL_HEADER.ehd_id
+The PK of the mail header.
+*/
+
+/*
+COMMENT ON COLUMN ABC_MAIL_HEADER.ehd_label
+The label of the mail header.
+*/
 
 CREATE TABLE ABC_MAIL_MESSAGE (
   elm_id INT UNSIGNED AUTO_INCREMENT NOT NULL,
@@ -44,6 +79,21 @@ CREATE TABLE ABC_MAIL_MESSAGE (
   CONSTRAINT PRIMARY_KEY PRIMARY KEY (elm_id)
 )
 engine=innodb;
+
+/*
+COMMENT ON TABLE ABC_MAIL_MESSAGE
+The mail messages.
+*/
+
+/*
+COMMENT ON COLUMN ABC_MAIL_MESSAGE.elm_id
+The PK of the mail message.
+*/
+
+/*
+COMMENT ON COLUMN ABC_MAIL_MESSAGE.cmp_id
+The ID of the company.
+*/
 
 /*
 COMMENT ON COLUMN ABC_MAIL_MESSAGE.blb_id_body
@@ -92,17 +142,17 @@ The number of Bcc addressees.
 
 /*
 COMMENT ON COLUMN ABC_MAIL_MESSAGE.elm_inserted
-The timestamp when this message was inserted.
+The timestamp when the message was inserted.
 */
 
 /*
 COMMENT ON COLUMN ABC_MAIL_MESSAGE.elm_picked_up
-The timestamp when this message was picked up by the delivery process
+The timestamp when the message was picked up by the delivery process
 */
 
 /*
 COMMENT ON COLUMN ABC_MAIL_MESSAGE.elm_sent
-The timestamp when this message was actually delivered to the MTA.
+The timestamp when the message was actually delivered to the MTA.
 */
 
 CREATE TABLE ABC_MAIL_MESSAGE_HEADER (
@@ -120,13 +170,38 @@ CREATE TABLE ABC_MAIL_MESSAGE_HEADER (
 engine=innodb;
 
 /*
+COMMENT ON TABLE ABC_MAIL_MESSAGE_HEADER
+The actual headers of the mail messages.
+*/
+
+/*
+COMMENT ON COLUMN ABC_MAIL_MESSAGE_HEADER.emh_id
+The PK mail message header.
+*/
+
+/*
+COMMENT ON COLUMN ABC_MAIL_MESSAGE_HEADER.cmp_id
+The ID of the company.
+*/
+
+/*
 COMMENT ON COLUMN ABC_MAIL_MESSAGE_HEADER.blb_id
 The ID of the BLOB (for attachment and embedded content)
 */
 
 /*
+COMMENT ON COLUMN ABC_MAIL_MESSAGE_HEADER.ehd_id
+The ID of the mail header.
+*/
+
+/*
+COMMENT ON COLUMN ABC_MAIL_MESSAGE_HEADER.elm_id
+The ID of the mail message.
+*/
+
+/*
 COMMENT ON COLUMN ABC_MAIL_MESSAGE_HEADER.usr_id
-The ID of the user associated wth the address.
+The ID of the user associated wth the mail address.
 */
 
 /*
