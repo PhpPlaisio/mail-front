@@ -12,31 +12,33 @@
  *
  * @type none
  */
-create procedure abc_mail_front_insert_message_header(in p_cmp_id      @abc_mail_message_header.cmp_id%type@,
-                                                      in p_blb_id      @abc_mail_message_header.blb_id%type@,
-                                                      in p_ehd_id      @abc_mail_message_header.ehd_id%type@,
-                                                      in p_elm_id      @abc_mail_message_header.elm_id%type@,
-                                                      in p_usr_id      @abc_mail_message_header.usr_id%type@,
-                                                      in p_emh_address @abc_mail_message_header.emh_address%type@,
-                                                      in p_emh_name    @abc_mail_message_header.emh_name%type@,
-                                                      in p_emh_value   @abc_mail_message_header.emh_value%type@)
-modifies sql data
+create procedure abc_mail_front_insert_message_header
+(
+  in p_cmp_id      smallint(5) unsigned, --               type: ABC_MAIL_MESSAGE_HEADER.cmp_id
+  in p_blb_id      int(10) unsigned, --                   type: ABC_MAIL_MESSAGE_HEADER.blb_id
+  in p_ehd_id      tinyint(3) unsigned, --                type: ABC_MAIL_MESSAGE_HEADER.ehd_id
+  in p_elm_id      int(10) unsigned, --                   type: ABC_MAIL_MESSAGE_HEADER.elm_id
+  in p_usr_id      int(10) unsigned, --                   type: ABC_MAIL_MESSAGE_HEADER.usr_id
+  in p_emh_address varchar(255) character set utf8mb4, -- type: ABC_MAIL_MESSAGE_HEADER.emh_address
+  in p_emh_name    varchar(255) character set utf8mb4, -- type: ABC_MAIL_MESSAGE_HEADER.emh_name
+  in p_emh_value   varchar(255) character set utf8mb4 --  type: ABC_MAIL_MESSAGE_HEADER.emh_value
+)
+  modifies sql data
 begin
   insert into ABC_MAIL_MESSAGE_HEADER( cmp_id
-  ,                                    elm_id
-  ,                                    ehd_id
-  ,                                    blb_id
-  ,                                    usr_id
-  ,                                    emh_address
-  ,                                    emh_name
-  ,                                    emh_value )
-  values( p_cmp_id
-  ,       p_elm_id
-  ,       p_ehd_id
-  ,       p_blb_id
-  ,       p_usr_id
-  ,       p_emh_address
-  ,       p_emh_name
-  ,       p_emh_value )
-  ;
+                                     , elm_id
+                                     , ehd_id
+                                     , blb_id
+                                     , usr_id
+                                     , emh_address
+                                     , emh_name
+                                     , emh_value )
+  values ( p_cmp_id
+         , p_elm_id
+         , p_ehd_id
+         , p_blb_id
+         , p_usr_id
+         , p_emh_address
+         , p_emh_name
+         , p_emh_value );
 end

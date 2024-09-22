@@ -12,45 +12,45 @@
  * @param p_elm_number_cc   The number of Cc addressees.
  * @param p_elm_number_bcc  The number of Bcc addressees.
  *
- * @type singleton1
- *
- * @return int
+ * @type singleton1 int
  */
-create procedure abc_mail_front_insert_message(in p_cmp_id          @abc_mail_message.cmp_id%type@,
-                                               in p_blb_id_body     @abc_mail_message.blb_id_body%type@,
-                                               in p_usr_id          @abc_mail_message.usr_id%type@,
-                                               in p_elm_address     @abc_mail_message.elm_address%type@,
-                                               in p_elm_name        @abc_mail_message.elm_name%type@,
-                                               in p_subject         @abc_mail_message.elm_subject%type@,
-                                               in p_elm_number_from @abc_mail_message.elm_number_from%type@,
-                                               in p_elm_number_to   @abc_mail_message.elm_number_to%type@,
-                                               in p_elm_number_cc   @abc_mail_message.elm_number_cc%type@,
-                                               in p_elm_number_bcc  @abc_mail_message.elm_number_bcc%type@)
-modifies sql data
+create procedure abc_mail_front_insert_message
+(
+  in p_cmp_id          smallint(5) unsigned, --               type: ABC_MAIL_MESSAGE.cmp_id
+  in p_blb_id_body     int(10) unsigned, --                   type: ABC_MAIL_MESSAGE.blb_id_body
+  in p_usr_id          int(10) unsigned, --                   type: ABC_MAIL_MESSAGE.usr_id
+  in p_elm_address     varchar(255) character set utf8mb4, -- type: ABC_MAIL_MESSAGE.elm_address
+  in p_elm_name        varchar(255) character set utf8mb4, -- type: ABC_MAIL_MESSAGE.elm_name
+  in p_subject         varchar(255) character set utf8mb4, -- type: ABC_MAIL_MESSAGE.elm_subject
+  in p_elm_number_from int(11), --                            type: ABC_MAIL_MESSAGE.elm_number_from
+  in p_elm_number_to   int(11), --                            type: ABC_MAIL_MESSAGE.elm_number_to
+  in p_elm_number_cc   int(11), --                            type: ABC_MAIL_MESSAGE.elm_number_cc
+  in p_elm_number_bcc  int(11) --                             type: ABC_MAIL_MESSAGE.elm_number_bcc
+)
+  modifies sql data
 begin
   insert into ABC_MAIL_MESSAGE( cmp_id
-  ,                             blb_id_body
-  ,                             usr_id
-  ,                             elm_address
-  ,                             elm_name
-  ,                             elm_subject
-  ,                             elm_number_from
-  ,                             elm_number_to
-  ,                             elm_number_cc
-  ,                             elm_number_bcc
-  ,                             elm_inserted )
-  values( p_cmp_id
-  ,       p_blb_id_body
-  ,       p_usr_id
-  ,       p_elm_address
-  ,       p_elm_name
-  ,       p_subject
-  ,       p_elm_number_from
-  ,       p_elm_number_to
-  ,       p_elm_number_cc
-  ,       p_elm_number_bcc
-  ,       now() )
-  ;
+                              , blb_id_body
+                              , usr_id
+                              , elm_address
+                              , elm_name
+                              , elm_subject
+                              , elm_number_from
+                              , elm_number_to
+                              , elm_number_cc
+                              , elm_number_bcc
+                              , elm_inserted )
+  values ( p_cmp_id
+         , p_blb_id_body
+         , p_usr_id
+         , p_elm_address
+         , p_elm_name
+         , p_subject
+         , p_elm_number_from
+         , p_elm_number_to
+         , p_elm_number_cc
+         , p_elm_number_bcc
+         , now() );
 
-  select last_insert_id() elm_id;
+  select last_insert_id() as elm_id;
 end

@@ -12,15 +12,13 @@
     "plaisio/company-resolver": "^2.1.0",
     "plaisio/kernel": "^3.2.1",
     "plaisio/mail-message": "^2.1.0",
-    "setbased/exception": "^2.3.0"
+    "setbased/exception": "^2.3.0",
+    "setbased/php-stratum-mysql": "^7.0.0"
   },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
   "require-dev": {
-    "phing/phing": "^3.0.0-RC4",
+    "phing/phing": "^3.0.0",
     "plaisio/console-kernel": "^1.0.1",
-    "setbased/php-stratum": "^6.3.1",
-    "setbased/php-stratum-mysql": "^6.6.0"
+    "setbased/php-stratum": "^6.3.1"
   },
   "autoload": {
     "psr-4": {
