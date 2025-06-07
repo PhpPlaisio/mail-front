@@ -6,7 +6,6 @@
 <th>Social</th>
 <th>Legal</th>
 <th>Release</th>
-<th>Code</th>
 </tr>
 </thead>
 <tbody>
@@ -19,9 +18,6 @@
 </td>
 <td>
 <a href="https://packagist.org/packages/plaisio/mail-front"><img src="https://poser.pugx.org/plaisio/mail-front/v/stable" alt="Latest Stable Version"/></a>
-</td>
-<td>
-<a href="https:///scrutinizer-ci.com/g/PhpPlaisio/mail-front/?branch=master"><img src="https://scrutinizer-ci.com/g/PhpPlaisio/mail-front/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/></a>
 </td>
 </tr>
 </tbody>
